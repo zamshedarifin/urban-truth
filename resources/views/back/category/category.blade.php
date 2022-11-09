@@ -1,5 +1,5 @@
 @extends('back.layouts.app')
-@section('title','Main Category')
+@section('title','Category')
 @section('content')
     <div class="page-content">
         <div class="container-fluid">
@@ -107,8 +107,6 @@
 
         </div>
     </div>
-
-
 
     <div class="modal fade" id="showModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">

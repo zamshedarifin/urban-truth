@@ -6,6 +6,7 @@ use App\Http\Controllers\User\Auth\RegisterController;
 use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\Category\CategoryController;
+use App\Http\Controllers\Admin\Product\ProductController;
 
 
 
@@ -50,6 +51,12 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function () {
             Route::match(['get','post'],'/',[CategoryController::class,'CategoryIndex'])->name('category');
             Route::match(['get','post'],'/sub-category',[CategoryController::class,'SubCategoryIndex'])->name('sub-category');
             Route::match(['get','post'],'/child-category',[CategoryController::class,'ChildCategoryIndex'])->name('child-category');
+
+        });
+
+        //Product
+        Route::prefix('product')->group(function (){
+            Route::match(['get','post'],'/',[ProductController::class,'ProductIndex'])->name('product');
 
         });
 

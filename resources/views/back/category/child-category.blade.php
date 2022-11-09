@@ -1,152 +1,169 @@
 @extends('back.layouts.app')
-@section('title','Sub Category')
+@section('title','Child Category')
 @section('content')
-
     <div class="page-content">
         <div class="container-fluid">
+
+            <!-- start page title -->
             <div class="row">
                 <div class="col-12">
                     <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                        <h4 class="mb-sm-0">Manage Sub-Category</h4>
+                        <h4 class="mb-sm-0">Category</h4>
+
                         <div class="page-title-right">
                             <ol class="breadcrumb m-0">
-                                <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">Dashboard</a></li>
-                                <li class="breadcrumb-item active">Manage Sub-Category</li>
+                                <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
+                                <li class="breadcrumb-item">Category</li>
+                                <li class="breadcrumb-item active"> Manage Child Category</li>
                             </ol>
                         </div>
+
                     </div>
                 </div>
             </div>
-
+            <!-- end page title -->
 
             <div class="row">
-                <div class="col-xxl-6">
+                <div class="col-lg-12">
                     <div class="card">
-                        <div class="card-header align-items-center d-flex">
-                            <h4 class="card-title mb-0 flex-grow-1">Add New Sub-Category</h4>
+                        <div class="card-header">
+                            <h4 class="card-title mb-0">Child Category List</h4>
                         </div><!-- end card header -->
 
                         <div class="card-body">
-                            <div class="live-preview">
-                                <form action="{{route('admin.sub-category')}}" method="post">
-                                    @csrf
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="mb-3">
-                                                <label for="cat" class="form-label">Select Main Category <span class="text-danger">*</span></label>
-                                                <select name="category" id="cat" class="form-control">
-                                                    <option value="" disabled selected>Select Main Category</option>
-                                                    @foreach($categories as $category)
-                                                    <option value="{{$category->id}}">{{$category->name}}</option>
-                                                    @endforeach
-                                                </select>
-
-                                            </div>
+                            <div id="customerList">
+                                <div class="row g-4 mb-3">
+                                    <div class="col-sm-auto">
+                                        <div>
+                                            <button type="button" class="btn btn-success add-btn" data-bs-toggle="modal" id="create-btn" data-bs-target="#showModal"><i class="ri-add-line align-bottom me-1"></i> Add</button>
                                         </div>
-
-                                        <div class="col-md-12">
-                                            <div class="mb-3">
-                                                <label for="subCat" class="form-label">Sub-Category Name <span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" name="sub_category_name" value="{{old('sub_category_name')}}"
-                                                       placeholder="sub category name write here" id="subCat">
-                                            </div>
-                                        </div>
-
-                                        <!--end col-->
-                                        <div class="col-lg-12">
-                                            <div class="text-end">
-                                                <button type="submit" class="btn btn-primary">Submit</button>
-                                            </div>
-                                        </div>
-                                        <!--end col-->
                                     </div>
-                                    <!--end row-->
-                                </form>
-                            </div>
 
-                        </div>
-                    </div>
-                </div> <!-- end col -->
-            </div>
-        </div>
+                                    <div class="col-sm">
+                                        <div class="d-flex justify-content-sm-end">
+                                            <div class="search-box ms-2">
+                                                <input type="text" class="form-control search" placeholder="Search...">
+                                                <i class="ri-search-line search-icon"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
 
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-12">
-                    @if (session('save'))
-                        <div class="alert alert-success">
-                            {{ session('save') }}
-                        </div>
-                    @endif
-                    @if (session('error'))
-                        <div class="alert alert-danger">
-                            {{ session('error') }}
-                        </div>
-                    @endif
-                </div>
-            </div>
-        </div>
-
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-xl-12">
-                    <div class="card">
-                        <div class="card-header align-items-center d-flex">
-                            <h4 class="card-title mb-0 flex-grow-1">Category List</h4>
-                        </div><!-- end card header -->
-
-                        <div class="card-body">
-                            <div class="live-preview">
-                                <div class="table-responsive table-card">
-                                    <table class="table align-middle table-nowrap table-striped-columns mb-0">
+                                <div class="table-responsive table-card mt-3 mb-1">
+                                    <table class="table align-middle table-nowrap" id="customerTable">
                                         <thead class="table-light">
                                         <tr>
-                                            <th scope="col">ID</th>
-                                            <th scope="col">Sub Category</th>
-                                            <th scope="col">Category</th>
-                                            <th scope="col">Create Date</th>
-                                            <th scope="col">Added By</th>
-                                            <th scope="col">Status</th>
+                                            <th class="sort" data-sort="id">id</th>
+                                            <th class="sort" data-sort="name">Title</th>
+                                            <th class="sort" data-sort="name">Category</th>
+                                            <th class="sort" data-sort="name">Sub-Category</th>
+                                            <th class="sort" data-sort="created_by">Created By</th>
+                                            <th class="sort" data-sort="status">Status</th>
+                                            <th class="sort" data-sort="action">Action</th>
                                         </tr>
                                         </thead>
-                                        <tbody>
-                                        @forelse($subCategories as $k=>$category)
-                                            <tr>
-                                                <td><a href="#" class="fw-medium">{{$k+1}}</a></td>
-                                                <td>{{$category->name}}</td>
-                                                <td>{{$category->MainCategory->name}}</td>
-                                                <td>{{date('d M Y',strtotime($category->created_at))}}</td>
-                                                <td>{{$category->admin->name}}</td>
-                                                <td>
-                                                    @if($category->active == 1)
-                                                        <a href="{{route('admin.sub-category.status',$category->id)}}">
-                                                            <span class="badge bg-success">Active</span>
-                                                        </a>
-                                                    @else
-                                                        <a href="{{route('admin.sub-category.status',$category->id)}}">
-                                                            <span class="badge bg-danger">Inactive</span>
-                                                        </a>
-                                                    @endif
-                                                </td>
-                                            </tr>
-                                        @empty
-                                            <tr>
-                                                <td colspan="6" class=" text-danger text-center">No Data Available!</td>
+                                        <tbody class="list form-check-all">
+                                        <tr>
+                                            <td>2</td>
+                                            <td>Sharee</td>
+                                            <td>Girls</td>
+                                            <td>Girls</td>
+                                            <td>Zamshed</td>
 
-                                            </tr>
-                                        @endif
+                                            <td><span class="badge badge-soft-success text-uppercase">Active</span></td>
+                                            <td>
+                                                <div class="d-flex gap-2">
+                                                    <div class="edit">
+                                                        <button class="btn btn-sm btn-success edit-item-btn" data-bs-toggle="modal" data-bs-target="#showModal">Edit</button>
+                                                    </div>
+                                                    <div class="remove">
+                                                        <button class="btn btn-sm btn-danger remove-item-btn" data-bs-toggle="modal" data-bs-target="#deleteRecordModal">Remove</button>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
 
                                         </tbody>
                                     </table>
+                                    <div class="noresult">
+                                        <div class="text-center">
+                                            <lord-icon src="https://cdn.lordicon.com/msoeawqm.json" trigger="loop" colors="primary:#121331,secondary:#08a88a" style="width:75px;height:75px"></lord-icon>
+                                            <h5 class="mt-2">Sorry! No Result Found</h5>
+                                            <p class="text-muted mb-0">We've searched more than 150+ Orders We did not find any orders for you search.</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="d-flex justify-content-end">
+                                    <div class="pagination-wrap hstack gap-2">
+
+                                    </div>
                                 </div>
                             </div>
-
-                        </div><!-- end card-body -->
-                    </div><!-- end card -->
-                </div><!-- end col -->
-            </div><!-- end row -->
+                        </div><!-- end card -->
+                    </div>
+                    <!-- end col -->
+                </div>
+                <!-- end col -->
+            </div>
+            <!-- end row -->
 
         </div>
-        <!-- container-fluid -->
+    </div>
+
+    <div class="modal fade" id="showModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header bg-light p-3">
+                    <h5 class="modal-title" id="exampleModalLabel"></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="close-modal"></button>
+                </div>
+                <form>
+                    <div class="modal-body">
+
+                        <div class="mb-3" id="modal-id" style="display: none;">
+                            <label for="id-field" class="form-label">ID</label>
+                            <input type="text" id="id-field" class="form-control" placeholder="ID" readonly />
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="customername-field" class="form-label">Customer Name</label>
+                            <input type="text" id="customername-field" class="form-control" placeholder="Enter Name" required />
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="email-field" class="form-label">Email</label>
+                            <input type="email" id="email-field" class="form-control" placeholder="Enter Email" required />
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="phone-field" class="form-label">Phone</label>
+                            <input type="text" id="phone-field" class="form-control" placeholder="Enter Phone no." required />
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="date-field" class="form-label">Joining Date</label>
+                            <input type="text" id="date-field" class="form-control" placeholder="Select Date" required />
+                        </div>
+
+                        <div>
+                            <label for="status-field" class="form-label">Status</label>
+                            <select class="form-control" data-trigger name="status-field" id="status-field">
+                                <option value="">Status</option>
+                                <option value="Active">Active</option>
+                                <option value="Block">Block</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <div class="hstack gap-2 justify-content-end">
+                            <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-success" id="add-btn">Add Customer</button>
+                            <button type="button" class="btn btn-success" id="edit-btn">Update</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
 @stop

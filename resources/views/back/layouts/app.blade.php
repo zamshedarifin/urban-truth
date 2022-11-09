@@ -69,6 +69,9 @@
 <script src="{{asset('back/assets/libs/swiper/swiper-bundle.min.js')}}"></script>
 <script src="{{asset('back/assets/js/pages/dashboard-ecommerce.init.js')}}"></script>
 
+<script src="{{asset('back/assets/libs/%40ckeditor/ckeditor5-build-classic/build/ckeditor.js')}}"></script>
+<script src="{{asset('back/assets/js/pages/form-editor.init.js')}}"></script>
+
 <!-- App js -->
 <script src="{{asset('back/assets/js/app.js')}}"></script>
 @stack('js')

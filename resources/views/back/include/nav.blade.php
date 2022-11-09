@@ -395,11 +395,11 @@ $permission = getPermission(\Illuminate\Support\Facades\Auth::guard('admin')->us
                     <div class="collapse menu-dropdown" id="proDucts">
                         <ul class="nav nav-sm flex-column">
                             <li class="nav-item">
-                                <a href="#}" target="_blank" class="nav-link" data-key="t-horizontal">Product Lists</a>
+                                <a href="#" target="_blank" class="nav-link" data-key="t-horizontal">Product Lists</a>
                             </li>
 
                             <li class="nav-item">
-                                <a href="#" target="_blank" class="nav-link" data-key="t-horizontal">Add Product</a>
+                                <a href="{{route('admin.product')}}" target="_blank" class="nav-link" data-key="t-horizontal">Add Product</a>
                             </li>
 
                             <li class="nav-item">
