@@ -25,6 +25,7 @@
     <link href="{{asset('back/assets/css/app.min.css')}}" rel="stylesheet" type="text/css" />
     <!-- custom Css-->
     <link href="{{asset('back/assets/css/custom.min.css')}}" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="http://cdn.bootcss.com/toastr.js/latest/css/toastr.min.css">
 
 </head>
 
@@ -41,9 +42,9 @@
 </div>
 <!-- END layout-wrapper -->
 <!--start back-to-top-->
-<button onclick="topFunction()" class="btn btn-danger btn-icon" id="back-to-top">
-    <i class="ri-arrow-up-line"></i>
-</button>
+{{--<button onclick="topFunction()" class="btn btn-danger btn-icon" id="back-to-top">--}}
+{{--    <i class="ri-arrow-up-line"></i>--}}
+{{--</button>--}}
 <!--end back-to-top-->
 
 <!--preloader-->
@@ -71,6 +72,8 @@
 
 <script src="{{asset('back/assets/libs/%40ckeditor/ckeditor5-build-classic/build/ckeditor.js')}}"></script>
 <script src="{{asset('back/assets/js/pages/form-editor.init.js')}}"></script>
+<script src="http://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
+{!! Toastr::message() !!}
 
 <!-- App js -->
 <script src="{{asset('back/assets/js/app.js')}}"></script>

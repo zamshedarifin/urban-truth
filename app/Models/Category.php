@@ -11,4 +11,9 @@ class Category extends Model
 
     protected $table = "categories";
     protected $guarded =[];
+
+    public function Admin()
+    {
+        return $this->belongsTo(Admin::class, 'created_by','id');
+    }
 }

@@ -52,9 +52,11 @@ $permission = getPermission(\Illuminate\Support\Facades\Auth::guard('admin')->us
                             </div>
 
                             <div class="dropdown-item bg-transparent text-wrap">
-                                <a href="{{route('admin.dashboard')}}" class="btn btn-soft-secondary btn-sm btn-rounded">how to setup <i
+                                <a href="{{route('admin.dashboard')}}"
+                                   class="btn btn-soft-secondary btn-sm btn-rounded">how to setup <i
                                         class="mdi mdi-magnify ms-1"></i></a>
-                                <a href="{{route('admin.dashboard')}}" class="btn btn-soft-secondary btn-sm btn-rounded">buttons <i
+                                <a href="{{route('admin.dashboard')}}"
+                                   class="btn btn-soft-secondary btn-sm btn-rounded">buttons <i
                                         class="mdi mdi-magnify ms-1"></i></a>
                             </div>
                             <!-- item-->
@@ -67,7 +69,6 @@ $permission = getPermission(\Illuminate\Support\Facades\Auth::guard('admin')->us
                                 <i class="ri-bubble-chart-line align-middle fs-18 text-muted me-2"></i>
                                 <span>Analytics Dashboard</span>
                             </a>
-
 
 
                             <div class="notification-list">
@@ -283,7 +284,8 @@ $permission = getPermission(\Illuminate\Support\Facades\Auth::guard('admin')->us
                             </div>
                             <div class="tab-pane fade p-4" id="alerts-tab" role="tabpanel" aria-labelledby="alerts-tab">
                                 <div class="w-25 w-sm-50 pt-3 mx-auto">
-                                    <img src="{{asset('back/assets/images/svg/bell.svg')}}" class="img-fluid" alt="user-pic">
+                                    <img src="{{asset('back/assets/images/svg/bell.svg')}}" class="img-fluid"
+                                         alt="user-pic">
                                 </div>
                                 <div class="text-center pb-5 mt-2">
                                     <h6 class="fs-18 fw-semibold lh-base">Hey! You have no any notifications </h6>
@@ -297,10 +299,12 @@ $permission = getPermission(\Illuminate\Support\Facades\Auth::guard('admin')->us
                     <button type="button" class="btn" id="page-header-user-dropdown" data-bs-toggle="dropdown"
                             aria-haspopup="true" aria-expanded="false">
                         <span class="d-flex align-items-center">
-                            <img class="rounded-circle header-profile-user" src="{{asset('back/assets/images/users/avatar-1.jpg')}}"
+                            <img class="rounded-circle header-profile-user"
+                                 src="{{asset('back/assets/images/users/avatar-1.jpg')}}"
                                  alt="Header Avatar">
                             <span class="text-start ms-xl-2">
-                                <span class="d-none d-xl-inline-block ms-1 fw-medium user-name-text">{{Auth::guard('admin')->user()->name}}</span>
+                                <span
+                                    class="d-none d-xl-inline-block ms-1 fw-medium user-name-text">{{Auth::guard('admin')->user()->name}}</span>
                             </span>
                         </span>
                     </button>
@@ -346,7 +350,8 @@ $permission = getPermission(\Illuminate\Support\Facades\Auth::guard('admin')->us
                         <img src="{{asset('back/assets/images/logo-light.png')}}" alt="" height="17">
                     </span>
         </a>
-        <button type="button" class="btn btn-sm p-0 fs-20 header-item float-end btn-vertical-sm-hover" id="vertical-hover">
+        <button type="button" class="btn btn-sm p-0 fs-20 header-item float-end btn-vertical-sm-hover"
+                id="vertical-hover">
             <i class="ri-record-circle-line"></i>
         </button>
     </div>
@@ -360,28 +365,37 @@ $permission = getPermission(\Illuminate\Support\Facades\Auth::guard('admin')->us
             </div>
             <ul class="navbar-nav" id="navbar-nav">
                 @if (in_array('admin', $permission))
-                <li class="menu-title"><span data-key="t-menu">Menu</span></li>
-                <li class="nav-item">
-                    <a class="nav-link menu-link" href="{{route('admin.dashboard')}}">
-                        <i class="ri-dashboard-2-line"></i> <span data-key="t-dashboards">Dashboard</span>
-                    </a>
-                </li> <!-- end Dashboard Menu -->
+                    <li class="menu-title"><span data-key="t-menu">Menu</span></li>
+                    <li class="nav-item">
+                        <a class="nav-link menu-link" href="{{route('admin.dashboard')}}">
+                            <i class="ri-dashboard-2-line"></i> <span data-key="t-dashboards">Dashboard</span>
+                        </a>
+                    </li> <!-- end Dashboard Menu -->
                 @endif
 
+                    <li class="nav-item">
+                        <a class="nav-link menu-link" href="{{route('admin.fabric')}}">
+                            <i class="ri-shirt-fill"></i> <span data-key="t-dashboards">Fabric</span>
+                        </a>
+                    </li>
                 <li class="nav-item">
-                    <a class="nav-link menu-link" href="#sidebarLayouts" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarLayouts">
+                    <a class="nav-link menu-link" href="#sidebarLayouts" data-bs-toggle="collapse" role="button"
+                       aria-expanded="false" aria-controls="sidebarLayouts">
                         <i class="ri-layout-3-line"></i> <span data-key="t-layouts">Category</span>
                     </a>
                     <div class="collapse menu-dropdown" id="sidebarLayouts">
                         <ul class="nav nav-sm flex-column">
                             <li class="nav-item">
-                                <a href="{{route('admin.category')}}" class="nav-link" data-key="t-horizontal">Manage Main Category</a>
+                                <a href="{{route('admin.category')}}" class="nav-link" data-key="t-horizontal">Manage
+                                    Main Category</a>
                             </li>
                             <li class="nav-item">
-                                <a href="{{route('admin.sub-category')}}" class="nav-link" data-key="t-detached">Manage Sub Category</a>
+                                <a href="{{route('admin.sub-category')}}" class="nav-link" data-key="t-detached">Manage
+                                    Sub Category</a>
                             </li>
                             <li class="nav-item">
-                                <a href="{{route('admin.child-category')}}" class="nav-link" data-key="t-detached">Manage Child Category</a>
+                                <a href="{{route('admin.child-category')}}" class="nav-link" data-key="t-detached">Manage
+                                    Child Category</a>
                             </li>
 
                         </ul>
@@ -389,72 +403,78 @@ $permission = getPermission(\Illuminate\Support\Facades\Auth::guard('admin')->us
                 </li> <!--end Dashboard Menu-->
 
                 <li class="nav-item">
-                    <a class="nav-link menu-link" href="#proDucts" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="proDucts">
+                    <a class="nav-link menu-link" href="#proDucts" data-bs-toggle="collapse" role="button"
+                       aria-expanded="false" aria-controls="proDucts">
                         <i class="ri-file-list-3-line"></i> <span data-key="t-authentication">Products</span>
                     </a>
                     <div class="collapse menu-dropdown" id="proDucts">
                         <ul class="nav nav-sm flex-column">
                             <li class="nav-item">
-                                <a href="#" target="_blank" class="nav-link" data-key="t-horizontal">Product Lists</a>
+                                <a href="{{route('admin.product.list')}}" class="nav-link" data-key="t-horizontal">Product
+                                    Lists</a>
                             </li>
 
                             <li class="nav-item">
-                                <a href="{{route('admin.product')}}" target="_blank" class="nav-link" data-key="t-horizontal">Add Product</a>
+                                <a href="{{route('admin.product.add')}}" class="nav-link" data-key="t-horizontal">Add
+                                    Product</a>
                             </li>
 
                             <li class="nav-item">
-                                <a href="#" target="_blank" class="nav-link" data-key="t-horizontal">Sync By POS</a>
+                                <a href="#" class="nav-link" data-key="t-horizontal">Sync By POS</a>
                             </li>
 
                             <li class="nav-item">
-                                <a href="#" target="_blank" class="nav-link" data-key="t-horizontal">Deleted Item</a>
+                                <a href="#" class="nav-link" data-key="t-horizontal">Deleted Item</a>
                             </li>
                         </ul>
                     </div>
                 </li>
 
-{{--                <li class="menu-title"><i class="ri-more-fill"></i> <span data-key="t-pages">Order</span></li>--}}
+                {{--                <li class="menu-title"><i class="ri-more-fill"></i> <span data-key="t-pages">Order</span></li>--}}
 
-{{--                <li class="nav-item">--}}
-{{--                    <a class="nav-link menu-link" href="#manageOrder" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="manageOrder">--}}
-{{--                        <i class="ri-bookmark-fill"></i> <span data-key="t-authentication">Manage Order</span>--}}
-{{--                    </a>--}}
-{{--                    <div class="collapse menu-dropdown" id="manageOrder">--}}
-{{--                        <ul class="nav nav-sm flex-column">--}}
-{{--                            <li class="nav-item">--}}
-{{--                                <a href="#" target="_blank" class="nav-link" data-key="t-horizontal">Order Lists</a>--}}
-{{--                            </li>--}}
+                {{--                <li class="nav-item">--}}
+                {{--                    <a class="nav-link menu-link" href="#manageOrder" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="manageOrder">--}}
+                {{--                        <i class="ri-bookmark-fill"></i> <span data-key="t-authentication">Manage Order</span>--}}
+                {{--                    </a>--}}
+                {{--                    <div class="collapse menu-dropdown" id="manageOrder">--}}
+                {{--                        <ul class="nav nav-sm flex-column">--}}
+                {{--                            <li class="nav-item">--}}
+                {{--                                <a href="#" target="_blank" class="nav-link" data-key="t-horizontal">Order Lists</a>--}}
+                {{--                            </li>--}}
 
-{{--                            <li class="nav-item">--}}
-{{--                                <a href="#" target="_blank" class="nav-link" data-key="t-horizontal">Cancle Order</a>--}}
-{{--                            </li>--}}
+                {{--                            <li class="nav-item">--}}
+                {{--                                <a href="#" target="_blank" class="nav-link" data-key="t-horizontal">Cancle Order</a>--}}
+                {{--                            </li>--}}
 
-{{--                            <li class="nav-item">--}}
-{{--                                <a href="#" target="_blank" class="nav-link" data-key="t-horizontal">Exchange Order</a>--}}
-{{--                            </li>--}}
+                {{--                            <li class="nav-item">--}}
+                {{--                                <a href="#" target="_blank" class="nav-link" data-key="t-horizontal">Exchange Order</a>--}}
+                {{--                            </li>--}}
 
 
-{{--                            <li class="nav-item">--}}
-{{--                                <a href="#" target="_blank" class="nav-link" data-key="t-horizontal">Order Log</a>--}}
-{{--                            </li>--}}
-{{--                        </ul>--}}
-{{--                    </div>--}}
-{{--                </li>--}}
+                {{--                            <li class="nav-item">--}}
+                {{--                                <a href="#" target="_blank" class="nav-link" data-key="t-horizontal">Order Log</a>--}}
+                {{--                            </li>--}}
+                {{--                        </ul>--}}
+                {{--                    </div>--}}
+                {{--                </li>--}}
 
                 <li class="menu-title"><i class="ri-more-fill"></i> <span data-key="t-pages">Settings</span></li>
 
                 <li class="nav-item">
-                    <a class="nav-link menu-link" href="#role" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="role">
+                    <a class="nav-link menu-link" href="#role" data-bs-toggle="collapse" role="button"
+                       aria-expanded="false" aria-controls="role">
                         <i class="ri-user-settings-line"></i> <span data-key="t-authentication">User Management</span>
                     </a>
                     <div class="collapse menu-dropdown" id="role">
                         <ul class="nav nav-sm flex-column">
                             <li class="nav-item">
-                                <a href="{{route('admin.role.list')}}" class="nav-link" data-key="t-horizontal">Role Manage</a>
+                                <a href="{{route('admin.role.list')}}" class="nav-link" data-key="t-horizontal">Role
+                                    Manage</a>
                             </li>
 
                             <li class="nav-item">
-                                <a href="{{route('admin.role.create')}}" class="nav-link" data-key="t-horizontal">Role Permission</a>
+                                <a href="{{route('admin.role.create')}}" class="nav-link" data-key="t-horizontal">Role
+                                    Permission</a>
                             </li>
 
                             <li class="nav-item">
@@ -464,7 +484,6 @@ $permission = getPermission(\Illuminate\Support\Facades\Auth::guard('admin')->us
                         </ul>
                     </div>
                 </li>
-
 
 
             </ul>

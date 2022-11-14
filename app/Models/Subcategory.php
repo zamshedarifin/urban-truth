@@ -2,13 +2,31 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Spatie\Sluggable\HasSlug;
+use Spatie\Sluggable\SlugOptions;
 use Illuminate\Database\Eloquent\Model;
 
 class Subcategory extends Model
 {
-    use HasFactory;
+    use HasSlug;
 
     protected $table = "sub_categories";
     protected $guarded =[];
+
+    public function admin()
+    {
+        return $this->belongsTo(Admin::class,'created_by','id');
+    }
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class,'cat_id','id');
+    }
+
+    public function getSlugOptions() : SlugOptions
+    {
+        return SlugOptions::create()
+            ->generateSlugsFrom('title')
+            ->saveSlugsTo('slug');
+    }
 }
