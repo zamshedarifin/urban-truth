@@ -77,25 +77,25 @@ class Manageimage extends Controller
             $product_medium_image = $get_productimg->productimg_img_medium;
             $productimg_img_thm = $get_productimg->productimg_img_thm;
             $productimg_img = $get_productimg->productimg_img;
-            File::delete("pgallery/$product_tiny_image");
-            File::delete("pgallery/$product_medium_image");
-            File::delete("pgallery/$productimg_img_thm");
-            File::delete("pgallery/$productimg_img");
+            File::delete("public/pgallery/$product_tiny_image");
+            File::delete("public/pgallery/$product_medium_image");
+            File::delete("public/pgallery/$productimg_img_thm");
+            File::delete("public/pgallery/$productimg_img");
             $file = $request->file('filename');
             $filename = $image_id . "_product_image_" . $file->getClientOriginalName();
-            $image = Image::make($request->file('filename'))->resize(1600, 2400)->save('pgallery/' . $filename);
+            $image = Image::make($request->file('filename'))->resize(1600, 2400)->save('public/pgallery/' . $filename);
             $width = Image::make($request->file('filename'))->width();
             $height = Image::make($request->file('filename'))->height();
             if ($width >= 1290 && $width <= 1310 && $height >= 1657 && $height <= 1677) {
                 //upload thm file
                 $filenamethmb = $product_id . "_product_image_thm_" . $file->getClientOriginalName();
-                $image = Image::make($request->file('filename'))->resize(200, 300)->save('pgallery/' . $filenamethmb);
+                $image = Image::make($request->file('filename'))->resize(200, 300)->save('public/pgallery/' . $filenamethmb);
                 //upload tiny file
                 $filenametiny = $product_id . "_product_image_tiny_" . $file->getClientOriginalName();
-                $image = Image::make($request->file('filename'))->resize(64, 96)->save('pgallery/' . $filenametiny);
+                $image = Image::make($request->file('filename'))->resize(64, 96)->save('public/pgallery/' . $filenametiny);
                 //upload medium file
                 $filenamemedium = $product_id . "_product_image_medium_" . $file->getClientOriginalName();
-                $image = Image::make($request->file('filename'))->resize(370, 555)->save('pgallery/' . $filenamemedium);
+                $image = Image::make($request->file('filename'))->resize(370, 555)->save('public/pgallery/' . $filenamemedium);
                 $productimg = Productimg::find($request->id);
                 $productimg->productimg_order=$request->productimg_order;
                 $productimg->productimg_img=$filename;
@@ -133,10 +133,10 @@ class Manageimage extends Controller
                 $product_medium_image = $get_productimg->productimg_img_medium;
                 $productimg_img_thm = $get_productimg->productimg_img_thm;
                 $productimg_img = $get_productimg->productimg_img;
-                File::delete("pgallery/$product_tiny_image");
-                File::delete("pgallery/$product_medium_image");
-                File::delete("pgallery/$productimg_img_thm");
-                File::delete("pgallery/$productimg_img");
+                File::delete("public/pgallery/$product_tiny_image");
+                File::delete("public/pgallery/$product_medium_image");
+                File::delete("public/pgallery/$productimg_img_thm");
+                File::delete("public/pgallery/$productimg_img");
                 Productimg::where('id', $imageId)->delete();
                     Toastr::success('Image deleted successfully!','Success');
                 return redirect()->back();

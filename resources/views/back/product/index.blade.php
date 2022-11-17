@@ -76,7 +76,7 @@
                                                 </td>
                                                 <td>{{$product->product_name}}</td>
                                                 <td>{{$product->product_styleref}}</td>
-                                                <td>{{ $product->category->title .'-->'. $product->subCategory->title}}</td>
+                                                <td>{{ $product->category->title .'->'. $product->childCategory->title}}</td>
                                                 <td>{{date('d M Y',strtotime($product->add_date))}}</td>
                                                 <td>{{$product->admin->name}}</td>
 
@@ -90,7 +90,7 @@
                                         @empty
 
                                             <tr>
-                                                <td colspan="5">
+                                                <td colspan="8">
                                                     <div class="noresult">
                                                         <div class="text-center">
                                                             <lord-icon src="https://cdn.lordicon.com/msoeawqm.json"

@@ -137,7 +137,7 @@
                                         <!--end col-->
 
 
-                                        <div class="col-md-4">
+                                        <div class="col-md-3">
                                             <div>
                                                 <label for="placeholderInput" class="form-label">Collection</label>
                                                 @foreach($campaigns as $campaign)
@@ -154,11 +154,28 @@
                                         </div>
                                         <!--end col-->
 
-                                        <div class="col-md-8">
+                                        <div class="col-md-3">
+                                            <div>
+                                                <label for="placeholderInput" class="form-label">Occasion</label>
+                                                @foreach($occasions as $occasion)
+                                                    <div class="form-check mb-3">
+                                                        <input class="form-check-input" type="checkbox" id="occassion{{$occasion->id}}" value="{{$occasion->id}}" name="occassion">
+                                                        <label class="form-check-label" for="occassion{{$occasion->id}}">
+                                                            {{$occasion->name}}
+                                                        </label>
+                                                    </div>
+                                                @endforeach
+
+
+                                            </div>
+                                        </div>
+                                        <!--end col-->
+
+                                        <div class="col-md-6">
                                             <div>
                                                 <label for="placeholderInput" class="form-label">Care Description</label>
                                                 <textarea class="form-control" type="text" name="txtproductcare" id="care"
-                                                          id="optional-input" rows="5" readonly>{{old('txtproductcare')}}</textarea>
+                                                          id="optional-input" rows="5" >{{old('txtproductcare')}}</textarea>
                                             </div>
                                         </div>
                                         <!--end col-->
@@ -315,7 +332,7 @@
                             <div class="col-lg-10 offset-1 ">
                                 <div class="card">
                                     <div class="card-header align-items-center d-flex">
-                                        <h4 class="card-title mb-0 flex-grow-1">File Input</h4>
+                                        <h4 class="card-title mb-0 flex-grow-1">Add Color</h4>
 
                                         <div class="flex-shrink-0">
                                             <div class="form-check">
@@ -392,7 +409,7 @@
                                                 <div class="col-lg-3">
                                                     <div>
                                                         <label for="formFileMultiple" class="form-label">Color Thumbnail</label>
-                                                      <input id="input-file" rel="file_colorthm" type="file" class="clone_field file input-file form-control" name="file_colorthm">
+                                                      <input id="input-file" rel="file_colorthm" type="file" class="clone_field file input-file form-control" name="file_colorthm" required>
                                                     <!--<input style="width:100%" type="file" rel="file_colorthm" name="file_colorthm" class="btn btn-primary clone_field" required>-->
                                                     <small style="color:#06be1c; font-size: 10px">[ Image Type: jpeg or jpg, Width: 81 Px Height: 62 PX ]</small>
                                                     </div>
@@ -409,7 +426,7 @@
                                                 <div class="col-lg-3">
                                                     <div>
                                                         <label for="formFileDisabled" class="form-label">Image 2</label>
-                                                      <input style="width:100%" type="file" rel="file_im2" name="file_im2" class="clone_field file input-file form-control">
+                                                      <input style="width:100%" type="file" rel="file_im2" name="file_im2" class="clone_field file input-file form-control" required>
                                                         <small style="color:#06be1c; font-size: 10px">[ Optional Image]</small>
                                                     </div>
                                                 </div>

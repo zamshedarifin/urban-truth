@@ -68,7 +68,7 @@
 <!--End Footer-->
 
 <!--Scoll Top-->
-<span id="site-scroll"><i class="icon anm anm-arw-up"></i></span>
+{{--<span id="site-scroll"><i class="icon anm anm-arw-up"></i></span>--}}
 <!--End Scoll Top-->
 
 

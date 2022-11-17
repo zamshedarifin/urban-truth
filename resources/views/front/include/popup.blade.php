@@ -247,43 +247,76 @@
 <!--End Quickview Popup-->
 
 <!--Product Promotion Popup-->
-<div class="product-notification" id="dismiss">
-    <span class="close" aria-hidden="true"><i class="an an-times-r"></i></span>
-    <div class="media d-flex">
-        <a href="#"><img class="mr-2 blur-up lazyload" src="{{asset('front/assets/images/product-images/bags-store-pro2.jpg')}}" data-src="{{asset('front/assets/images/product-images/bags-store-pro2.jpg')}}" alt="Trim Button Front Blouse" /></a>
-        <div class="media-body">
-            <h5 class="mt-0 mb-1">New Product</h5>
-            <p class="pname"><a href="#">Trim Button Front Blouse</a></p>
-            <p class="detail">14 Minutes ago from New York, USA</p>
-        </div>
-    </div>
-</div>
+{{--<div class="product-notification" id="dismiss">--}}
+{{--    <span class="close" aria-hidden="true"><i class="an an-times-r"></i></span>--}}
+{{--    <div class="media d-flex">--}}
+{{--        <a href="#"><img class="mr-2 blur-up lazyload" src="{{asset('front/assets/images/product-images/bags-store-pro2.jpg')}}" data-src="{{asset('front/assets/images/product-images/bags-store-pro2.jpg')}}" alt="Trim Button Front Blouse" /></a>--}}
+{{--        <div class="media-body">--}}
+{{--            <h5 class="mt-0 mb-1">New Product</h5>--}}
+{{--            <p class="pname"><a href="#">Trim Button Front Blouse</a></p>--}}
+{{--            <p class="detail">14 Minutes ago from New York, USA</p>--}}
+{{--        </div>--}}
+{{--    </div>--}}
+{{--</div>--}}
 <!--End Product Promotion Popup-->
 
 
 <!--Newsletter Popup-->
-<div id="newsletter-modal" class="style1 mfp-with-anim mfp-hide">
-    <div class="d-flex flex-column">
-        <div class="newsltr-img d-none d-sm-none d-md-block"><img class="blur-up lazyload" src="{{asset('front/assets/images/newsletter-img.webp')}}" data-src="{{asset('front/assets/images/newsletter-img.webp')}}" alt="image" width="550" height="290"></div>
-        <div class="newsltr-text text-center">
-            <div class="wraptext">
-                <p><b>GET THE UPDATES ABOUT LATEST TREANDS</b></p>
-                <h2 class="title fw-normal mb-4">20% OFF YOUR FIRST ORDER</h2>
-                <form action="#" method="post" class="mcNewsletter mb-4">
-                    <div class="input-group d-flex flex-nowrap">
-                        <input type="email" class="rounded-start newsletter__input" name="EMAIL" value="" placeholder="Email address" required>
-                        <span><button type="submit" class="btn mcNsBtn rounded-end" name="commit"><span>Subscribe</span></button></span>
-                    </div>
-                </form>
-                <div class="customCheckbox justify-content-center checkboxlink clearfix mb-3">
-                    <input id="dontshow" name="newsPopup" type="checkbox" />
-                    <label for="dontshow" class="pt-1">Don't show this popup again</label>
-                </div>
-                <p>Your information will never be shared</p>
-            </div>
-        </div>
-    </div>
-    <button title="Close (Esc)" type="button" class="mfp-close">×</button>
-</div>
+{{--<div id="newsletter-modal" class="style1 mfp-with-anim mfp-hide">--}}
+{{--    <div class="d-flex flex-column">--}}
+{{--        <div class="newsltr-img d-none d-sm-none d-md-block"><img class="blur-up lazyload" src="{{asset('front/assets/images/newsletter-img.webp')}}" data-src="{{asset('front/assets/images/newsletter-img.webp')}}" alt="image" width="550" height="290"></div>--}}
+{{--        <div class="newsltr-text text-center">--}}
+{{--            <div class="wraptext">--}}
+{{--                <p><b>GET THE UPDATES ABOUT LATEST TREANDS</b></p>--}}
+{{--                <h2 class="title fw-normal mb-4">20% OFF YOUR FIRST ORDER</h2>--}}
+{{--                <form action="#" method="post" class="mcNewsletter mb-4">--}}
+{{--                    <div class="input-group d-flex flex-nowrap">--}}
+{{--                        <input type="email" class="rounded-start newsletter__input" name="EMAIL" value="" placeholder="Email address" required>--}}
+{{--                        <span><button type="submit" class="btn mcNsBtn rounded-end" name="commit"><span>Subscribe</span></button></span>--}}
+{{--                    </div>--}}
+{{--                </form>--}}
+{{--                <div class="customCheckbox justify-content-center checkboxlink clearfix mb-3">--}}
+{{--                    <input id="dontshow" name="newsPopup" type="checkbox" />--}}
+{{--                    <label for="dontshow" class="pt-1">Don't show this popup again</label>--}}
+{{--                </div>--}}
+{{--                <p>Your information will never be shared</p>--}}
+{{--            </div>--}}
+{{--        </div>--}}
+{{--    </div>--}}
+{{--    <button title="Close (Esc)" type="button" class="mfp-close">×</button>--}}
+{{--</div>--}}
 <!--End Newsletter Popup-->
 
+
+@push('script')
+
+    <!--Newsletter Popup Cookies-->
+{{--    <script>--}}
+{{--        function newsletter_popup() {--}}
+{{--            var cookieSignup = "cookieSignup", date = new Date();--}}
+{{--            if ($.cookie(cookieSignup) != 'true' && window.location.href.indexOf("challenge#newsletter-modal") <= -1) {--}}
+{{--                setTimeout(function () {--}}
+{{--                        $.magnificPopup.open({--}}
+{{--                                items: {--}}
+{{--                                    src: '#newsletter-modal'--}}
+{{--                                }--}}
+{{--                                , type: 'inline', removalDelay: 300, mainClass: 'mfp-zoom-in'--}}
+{{--                            }--}}
+{{--                        );--}}
+{{--                    }--}}
+{{--                    , 5000);--}}
+{{--            }--}}
+{{--            $.magnificPopup.instance.close = function () {--}}
+{{--                if ($("#dontshow").prop("checked") == true) {--}}
+{{--                    $.cookie(cookieSignup, 'true', {--}}
+{{--                            expires: 1, path: '/'--}}
+{{--                        }--}}
+{{--                    );--}}
+{{--                }--}}
+{{--                $.magnificPopup.proto.close.call(this);--}}
+{{--            }--}}
+{{--        }--}}
+{{--        newsletter_popup();--}}
+{{--    </script>--}}
+    <!--End Newsletter Popup Cookies-->
+@endpush

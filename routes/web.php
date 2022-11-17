@@ -10,9 +10,7 @@ use App\Http\Controllers\Admin\Product\ProductController;
 
 
 
-Route::get('/', function () {
-    return view('front.include.content');
-})->name('homePage');
+Route::get('/',[\App\Http\Controllers\HomeController::class,'index'])->name('homePage');
 
 Route::get('clear', function(){
     Artisan::call('view:clear');
@@ -21,6 +19,14 @@ Route::get('clear', function(){
     Artisan::call('config:clear');
     Artisan::call('config:cache');
 });
+Route::get('ajax/ajax-product-details',[\App\Http\Controllers\AjaxController::class,'popup']);
+Route::get('/ajaxcall-getQuantityByColor/{id1}/{id2}/{id3}', [\App\Http\Controllers\AjaxController::class,'getQuantityByColor'])->name('GetQty');
+
+Route::get('category/{catId}/{subCatId}/{childCatId}',[\App\Http\Controllers\HomeController::class,'CategoryList'])->name('categoryList');
+Route::get('category/{catId}',[\App\Http\Controllers\HomeController::class,'CategoryProducts'])->name('category');
+Route::get('collection/{catId}/{campId}',[\App\Http\Controllers\HomeController::class,'CollectionProducts'])->name('collection');
+Route::get('occasion/{catId}/{occasionId}',[\App\Http\Controllers\HomeController::class,'OccasionProducts'])->name('occasion');
+
 
 Route::prefix('user')->name('user.')->group(function () {
     Route::namespace('Auth')->group(function () {

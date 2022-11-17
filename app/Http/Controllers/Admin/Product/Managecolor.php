@@ -29,7 +29,7 @@ class Managecolor extends Controller
             $file = $request->file('productalbum_img');
             $savename = $productalbum_id . 'update_album_thm_' . $file->getClientOriginalName();
             Image::make($request->file('productalbum_img'))->save('public/pgallery/' . $savename);
-            Storage::delete("pgallery/$album->productalbum_img");
+            File::delete("public/pgallery/$album->productalbum_img");
             $album->productalbum_img=$savename;
         }
         $album->save();
@@ -89,7 +89,7 @@ class Managecolor extends Controller
                     if ($request->hasFile('file_colorthm')) {
                         $file = $request->file('file_colorthm');
                         $savename = $productalbum_id . '_album_thm_' . $file->getClientOriginalName();
-                        $image = Image::make($request->file('file_colorthm'))->save('pgallery/' . $savename);
+                        $image = Image::make($request->file('file_colorthm'))->save('public/pgallery/' . $savename);
                         if ($image) {
                             $update_album=Productalbum::find($productalbum_id);
                             $update_album->productalbum_img=$savename;
@@ -100,7 +100,7 @@ class Managecolor extends Controller
                                 if ($request->hasFile($imgfieldname)) {
                                     $file = $request->file($imgfieldname);
                                     $filename = $product_id . "_product_image_" . $filecounter . "_" . $file->getClientOriginalName();
-                                    $image = Image::make($request->file($imgfieldname))->resize(1300, 1667)->save('pgallery/' . $filename);
+                                    $image = Image::make($request->file($imgfieldname))->resize(1300, 1667)->save('public/pgallery/' . $filename);
                                     $proimage=new Productimg();
                                     $proimage->productalbum_id=$productalbum_id;
                                     $proimage->productimg_order=$filecounter;
@@ -112,13 +112,13 @@ class Managecolor extends Controller
                                         if ($width >= 1290 && $width <= 1310 && $height >= 1657 && $height <= 1677) {
                                             //upload thm file
                                             $filenamethmb = $product_id . "_product_image_" . $filecounter . "_thm_" . $file->getClientOriginalName();
-                                            $image = Image::make($request->file($imgfieldname))->resize(200, 300)->save('pgallery/' . $filenamethmb);
+                                            $image = Image::make($request->file($imgfieldname))->resize(200, 300)->save('public/pgallery/' . $filenamethmb);
                                             //upload tiny file
                                             $filenametiny = $product_id . "_product_image_" . $filecounter . "_tiny_" . $file->getClientOriginalName();
-                                            $image = Image::make($request->file($imgfieldname))->resize(64, 96)->save('pgallery/' . $filenametiny);
+                                            $image = Image::make($request->file($imgfieldname))->resize(64, 96)->save('public/pgallery/' . $filenametiny);
                                             //upload medium file
                                             $filenamemedium = $product_id . "_product_image_" . $filecounter . "_medium_" . $file->getClientOriginalName();
-                                            $image = Image::make($request->file($imgfieldname))->resize(370, 555)->save('pgallery/' . $filenamemedium);
+                                            $image = Image::make($request->file($imgfieldname))->resize(370, 555)->save('public/pgallery/' . $filenamemedium);
                                             $image=Productimg::find($productimg_id);
                                             $image->productimg_img=$filename;
                                             $image->productimg_img_tiny=$filenametiny;
@@ -166,10 +166,10 @@ class Managecolor extends Controller
                     $product_medium_image = $get_productimg->productimg_img_medium;
                     $productimg_img_thm = $get_productimg->productimg_img_thm;
                     $productimg_img = $get_productimg->productimg_img;
-                     File::delete("pgallery/$product_tiny_image");
-                     File::delete("pgallery/$product_medium_image");
-                     File::delete("pgallery/$productimg_img_thm");
-                     File::delete("pgallery/$productimg_img");
+                     File::delete("public/pgallery/$product_tiny_image");
+                     File::delete("public/pgallery/$product_medium_image");
+                     File::delete("public/pgallery/$productimg_img_thm");
+                     File::delete("public/pgallery/$productimg_img");
                     Productimg::where('id', $info->id)->delete();
                  }
             }

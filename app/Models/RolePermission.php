@@ -13,7 +13,7 @@ class RolePermission extends Model
 
 
     public function get_permission($role_id){
-        $role_permission=Rolepermission::where('role_id',$role_id)->get();
+        $role_permission=RolePermission::where('role_id',$role_id)->get();
         $permission=[];
         foreach($role_permission as $p_list){
             $permission[]=$p_list->permission;

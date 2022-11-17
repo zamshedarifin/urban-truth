@@ -160,7 +160,7 @@
                                         <!--end col-->
 
 
-                                        <div class="col-md-4">
+                                        <div class="col-md-3">
                                             <div>
                                                 <label for="placeholderInput" class="form-label">Collection</label>
                                                 @foreach($campaigns as $campaign)
@@ -179,8 +179,26 @@
                                             </div>
                                         </div>
                                         <!--end col-->
+                                            <div class="col-md-3">
+                                                <div>
+                                                    <label for="placeholderInput" class="form-label">Occasion</label>
+                                                    @foreach($occasions as $occasion)
+                                                        <div class="form-check mb-3">
+                                                            <input class="form-check-input" type="checkbox" id="occassion{{$occasion->id}}" value="{{$occasion->id}}"
+                                                                   @if($product->spcollection == $occasion->id ) checked
+                                                                   @endif name="occassion">
+                                                            <label class="form-check-label" for="occassion{{$occasion->id}}">
+                                                                {{$occasion->name}}
+                                                            </label>
+                                                        </div>
+                                                    @endforeach
 
-                                        <div class="col-md-8">
+
+                                                </div>
+                                            </div>
+                                            <!--end col-->
+
+                                        <div class="col-md-6">
                                             <div>
                                                 <label for="placeholderInput" class="form-label">Care
                                                     Description</label>
@@ -804,7 +822,7 @@
                             var id = response[i]['id'];
                             var productimg_img_tiny = response[i]['productimg_img_tiny'];
                             var productimg_order = response[i]['productimg_order'];
-                            var imgUrl = 'http://127.0.0.1:8000/pgallery/';
+                            var imgUrl = 'https://www.xamslab.com/pgallery/';
 
                             var url = '{{route('admin.product.image.edit',['imageId' => ':id','serial'=>':i','productId'=>':pID'])}}';
                             var delurl = '{{route('admin.product.image.delete',['imageId' => ':id','serial'=>':i','productId'=>':pID'])}}';

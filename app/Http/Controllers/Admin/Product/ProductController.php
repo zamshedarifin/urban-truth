@@ -7,6 +7,7 @@ use App\Models\Campaign;
 use App\Models\Category;
 use App\Models\Childcategory;
 use App\Models\Fabric;
+use App\Models\occasion;
 use App\Models\Product;
 use App\Models\Productalbum;
 use App\Models\Productimg;
@@ -38,8 +39,9 @@ class ProductController extends Controller
         $fabrics = Fabric::get();
         $avail_size = Size::all();
         $campaigns = Campaign::where('status',1)->orderBy('id','DESC')->get();
+        $occasions = occasion::where('status',1)->orderBy('id','DESC')->get();
         $total_product = Product::count();
-        return view('back.product.create',compact('avail_size','categories','fabrics','total_product','campaigns'));
+        return view('back.product.create',compact('avail_size','categories','fabrics','total_product','campaigns','occasions'));
     }
 
     public function ProductSave(Request $request)
@@ -58,16 +60,25 @@ class ProductController extends Controller
                } else {
                    $discount = $request->txtpricediscounted;
                    $original_price = $request->txtprice;
+
                    if ($discount >= 1) {
-                       $discount_price = $original_price - $discount;
-                       $discount_price = ($discount_price * 100) / $original_price;
+                       $discount_price = ($discount / 100) * $original_price;
+                       $price_with_discount=$original_price - $discount_price;
                    } else {
-                       $discount_price = 0;
+                       $price_with_discount = 0;
                    }
+
                    if ($request->campaign) {
                        $specialcollection = $request->campaign;
                    } else {
                        $specialcollection = 0;
+                   }
+
+
+                   if ($request->has('occassion')) {
+                       $occassion = $request->occassion;
+                   } else {
+                       $occassion = 0;
                    }
 
                    $product=new Product();
@@ -79,12 +90,16 @@ class ProductController extends Controller
                    $product->fabric= $request->fabric;
 
                    $product->product_price=$request->txtprice;
-                   $product->discount_product_price=$discount_price;
+                   $product->discount=$request->txtpricediscounted;
+                   $product->discount_product_price=$price_with_discount;
+
+
                    $product->product_styleref = $request->txtstyleref;
                    $product->product_description = $request->txtproductdetails;
                    $product->product_care = $request->txtproductcare;
                    $product->created_by=$created_by;
                    $product->isSpecial=$specialcollection;
+                   $product->spcollection=$occassion;
                    $product->sold=$request->txtorder;
                    $product->add_date= date('Y-m-d');;
                    $product->save();
@@ -224,9 +239,10 @@ class ProductController extends Controller
         $fabrics = Fabric::get();
         $avail_size = Size::all();
         $campaigns = Campaign::where('status',1)->orderBy('id','DESC')->get();
+        $occasions = occasion::where('status',1)->orderBy('id','DESC')->get();
         $prosizes=Size::where('active',1)->get();
         $product=Product::find($id);
-        return view ('back.product.edit',compact('avail_size','categories','fabrics','campaigns','product','subcategories','childcategories','prosizes'));
+        return view ('back.product.edit',compact('avail_size','categories','fabrics','campaigns','product','subcategories','childcategories','prosizes','occasions'));
     }
 
     public function ProductUpdate(Request $request ,$id){
@@ -235,10 +251,13 @@ class ProductController extends Controller
         } else {
             $isSpecial = 0;
         }
-
+        if ($request->has('occassion')) {
+            $occassion = $request->occassion;
+        } else {
+            $occassion = 0;
+        }
         $discount = $request->txtpricediscounted;
         $original_price = $request->txtprice;
-
 
         if ($discount >= 1) {
             $discount_price = ($discount / 100) * $original_price;
@@ -246,8 +265,6 @@ class ProductController extends Controller
         } else {
             $price_with_discount = 0;
         }
-
-
         $product=Product::find($id);
         $product->cat_id=$request->category;
         $product->sub_cat_id=$request->sub_category;
@@ -256,17 +273,20 @@ class ProductController extends Controller
         if($request->fabric){
             $product->fabric= $request->fabric;
         }
+
         $product->product_price=$request->txtprice;
-        $product->discount_product_price=$request->txtpricediscounted;
+        $product->discount=$request->txtpricediscounted;
+        $product->discount_product_price=$price_with_discount;
+
         $product->product_styleref = $request->txtstyleref;
         $product->product_description = $request->txtproductdetails;
         $product->product_short_description=$request->product_short_description;
         $product->product_care = $request->txtproductcare;
         $product->updated_by= Auth::guard('admin')->user()->id;
-        $product->isSpecial= $product->isSpecial=$isSpecial;;
+        $product->isSpecial= $product->isSpecial=$isSpecial;
+        $product->spcollection=$occassion;
         $product->sold=$request->txtorder;
         $product->save();
-
         Toastr::success('Product Updated successfully!','success');
         return back();
 
