@@ -87,6 +87,10 @@
                             $images = \App\Http\Controllers\ProductController::productImages($newProduct->id);
                             $colors = \App\Http\Controllers\ProductController::GetColors($newProduct->id);
                             $product_qty = \App\Http\Controllers\ProductController::GetProductQty($newProduct->id);
+                             $product_name = str_replace(' ', '-', $newProduct->product_name);
+                             $product_url = strtolower($product_name);
+                             $color_album=str_replace('/','-',$newProduct->productalbum_name);
+    						$color_album = strtolower($color_album);
                         @endphp
                         <div class="col-12 item">
                             <!-- start product image -->
@@ -155,7 +159,7 @@
                             <div class="product-details text-center" style="background: #fffbfb; padding: 10px;">
                                 <!-- product name -->
                                 <div class="product-name">
-                                    <a href="#">{{$newProduct->product_name}} </a>
+                                    <a href="{{url("shop/{$product_url}/color-{$color_album}/{$newProduct->id}")}}">{{$newProduct->product_name}} </a>
                                     <a href="#" style="float: right; font-size: 16px; margin-top: 6px;"><i
                                             class="icon anm anm-heart-l"></i></a>
                                 </div>
@@ -359,101 +363,7 @@
         </div>
         <!--End insta feed-->
     </div>
-    <div id="quick-view"></div>
+
 
 @stop
-
-@push('script')
-    <script>
-        jQuery(window).ready(function($){
-            $('.quick-view').on('click', function(){
-                //var product_id=700;
-                //$(window).scrollTop(0);
-                var product_id = $(this).data('id');
-                var product_color = $(this).data('color');
-                var base_url = "{{URL::to('/')}}";
-                var url_op = base_url + "/ajax/ajax-product-details";
-                $(".loading-modal").show();
-                $.ajax({
-                    url: url_op,
-                    type: 'GET',
-                    data: {id: product_id,color:product_color},
-                    success: function (html) {
-                        // alert(html);
-                        if(html=='null'){
-                            $("#quick-view").html("<p style='text-align:center;color:red;padding-top:20px;'>Server Error.</p>");
-                        }else{
-
-                            $("#quick-view").html(html);
-                            $(".loading-modal").hide();
-                            var product_id =$('#productid').val();
-
-                            // alert(product_id)
-                            var color_name = product_color;
-                            var productSize = $('#product-size-input').val();
-                            $('.swatch-element-size').click(function () {
-                                //alert($(this).data('value'));
-                                $('#product-size-input').val($(this).data('value'));
-
-                            });
-                            getQtyByColorSize(product_id, color_name, productSize);
-                            $('#pqty').on('change', function (e) {
-                                var pqty = e.target.value;
-                                $('#productQty').val(pqty);
-                            });
-                            $('.swatch-element-size').on('click', function (e) {
-                                var productSize = $('#product-size-input').val();
-                                $(".loading-modal").show();
-                                getQtyByColorSize(product_id, color_name, productSize);
-                            });
-                            $('#colorName').on('change', function (e) {
-                                var productColor = e.target.value;
-                                $('#productColor').val(productColor);
-                            });
-
-                            function  getQtyByColorSize(product_id, color_name, productSize) {
-                                var url_op = base_url + "/ajaxcall-getQuantityByColor/" + product_id + '/' + productSize + '/' + color_name;
-                                $.ajax({
-                                    url: url_op,
-                                    type: 'GET',
-                                    dataType: 'json',
-                                    data: '',
-                                    success: function (stock) {
-                                        //  alert(html);
-                                        $(".loading-modal").hide();
-                                        var qty = stock;
-                                        //  alert(qty);
-                                        if (qty > 0) {
-                                            $('#qty').attr({"max": qty});
-                                            $("#sold_out_msg").html(" ");
-                                            $(".product-inventory").show();
-                                            $("#stock-msg").html("<span style='color:green;'>In stock</span>");
-                                            $('#qty').val(1);
-                                            $('#product-add-to-cart').val("Add to Cart");
-                                            document.getElementById("product-add-to-cart").disabled = false;
-                                        } else {
-                                            $('#qty').val(0);
-                                            $('#qty').attr({"max": 0});
-                                            $("#sold_out_msg").html("<span style='color:red;font-weight:700;padding-bottom:10px;'>" + productSize + " size has sold out. Please select another size.</span>");
-                                            $(".product-inventory").show();
-                                            $("#stock-msg").html("<span style='color:red;'>Out of stock</span>");
-                                            $('#product-add-to-cart').val("Out of stock");
-                                            document.getElementById("product-add-to-cart").disabled = true;
-                                        }
-                                    }
-                                });
-                            }
-                            $('.close-modal').on('click', function(){
-                                $('.ajax-quickview').fadeOut();
-                            });
-
-                        }
-                    }
-                });
-
-            });
-
-        });
-    </script>
-@endpush
 

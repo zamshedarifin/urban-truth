@@ -179,12 +179,13 @@
                                                     @endif
                                                     <li>
                                                         <!--Quick View Button-->
-                                                        <a href="javascript:void(0)" title="Quick View"
-                                                           class="btn-icon quick-view-popup quick-view btn-square"
-                                                           data-toggle="modal" data-target="#content_quickview">
+                                                        <button title="Quick View" data-id="{{$catProduct->id}}"
+                                                                data-color="{{$catProduct->productalbum_name}}"
+                                                                class="btn-icon quick-view-popup quick-view btn-square"
+                                                                data-toggle="modal" data-target="#content_quickview">
                                                             <i class="icon anm anm-search-plus-l"></i>
                                                             <span class="tooltip-label">Quick View</span>
-                                                        </a>
+                                                        </button>
                                                         <!--End Quick View Button-->
                                                     </li>
                                                 </ul>

@@ -124,12 +124,12 @@
                         <div class="row">
 
 
-                            @foreach($collectionProducts as $catProduct)
+                            @foreach($collectionProducts as $collection)
                                 <?php
-                                $medium_image = \App\Http\Controllers\ProductController::GetProductImage($catProduct->id);
-                                $images = \App\Http\Controllers\ProductController::productImages($catProduct->id);
-                                $colors = \App\Http\Controllers\ProductController::GetColors($catProduct->id);
-                                $product_qty = \App\Http\Controllers\ProductController::GetProductQty($catProduct->id);
+                                $medium_image = \App\Http\Controllers\ProductController::GetProductImage($collection->id);
+                                $images = \App\Http\Controllers\ProductController::productImages($collection->id);
+                                $colors = \App\Http\Controllers\ProductController::GetColors($collection->id);
+                                $product_qty = \App\Http\Controllers\ProductController::GetProductQty($collection->id);
                                 ?>
                                 <div class="col-6 col-sm-6 col-md-4 col-lg-4 item" style="display: block;">
                                     <!-- start product image -->
@@ -178,12 +178,13 @@
                                                 @endif
                                                 <li>
                                                     <!--Quick View Button-->
-                                                    <a href="javascript:void(0)" title="Quick View"
-                                                       class="btn-icon quick-view-popup quick-view btn-square"
-                                                       data-toggle="modal" data-target="#content_quickview">
+                                                    <button title="Quick View" data-id="{{$collection->id}}"
+                                                            data-color="{{$collection->productalbum_name}}"
+                                                            class="btn-icon quick-view-popup quick-view btn-square"
+                                                            data-toggle="modal" data-target="#content_quickview">
                                                         <i class="icon anm anm-search-plus-l"></i>
                                                         <span class="tooltip-label">Quick View</span>
-                                                    </a>
+                                                    </button>
                                                     <!--End Quick View Button-->
                                                 </li>
                                             </ul>
@@ -196,19 +197,19 @@
                                          style="background: #fffbfb; padding: 10px;">
                                         <!-- product name -->
                                         <div class="product-name">
-                                            <a href="#">{{$catProduct->product_name}} </a>
+                                            <a href="#">{{$collection->product_name}} </a>
                                             <a href="#" style="float: right; font-size: 16px; margin-top: 6px;"><i
                                                     class="icon anm anm-heart-l"></i></a>
                                         </div>
                                         <!-- End product name -->
                                         <!-- product price -->
                                         <div class="product-price">
-                                            @if($catProduct->discount < 1)
-                                                <span class="price">BDT {{$catProduct->product_price}}</span>
+                                            @if($collection->discount < 1)
+                                                <span class="price">BDT {{$collection->product_price}}</span>
                                             @else
-                                                <span class="price">BDT {{$catProduct->discount_product_price}}</span>
+                                                <span class="price">BDT {{$collection->discount_product_price}}</span>
                                                 <span
-                                                    class="old-price text-danger">BDT {{$catProduct->product_price}}</span>
+                                                    class="old-price text-danger">BDT {{$collection->product_price}}</span>
                                                 {{--                                    <del style="margin-left: 20px">BDT {{$newProduct->product_price}}</del>--}}
 
                                             @endif

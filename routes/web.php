@@ -27,6 +27,9 @@ Route::get('category/{catId}',[\App\Http\Controllers\HomeController::class,'Cate
 Route::get('collection/{catId}/{campId}',[\App\Http\Controllers\HomeController::class,'CollectionProducts'])->name('collection');
 Route::get('occasion/{catId}/{occasionId}',[\App\Http\Controllers\HomeController::class,'OccasionProducts'])->name('occasion');
 
+//details
+Route::get('/shop/{id1}/{id2}/{id3}', [\App\Http\Controllers\ProductController::class,'details'])->name('product.details');
+Route::post('/add-to-cart', [\App\Http\Controllers\Cart\CartController::class,'AddToCart'])->name('AddToCart');
 
 Route::prefix('user')->name('user.')->group(function () {
     Route::namespace('Auth')->group(function () {

@@ -679,8 +679,6 @@ body.index-jewelry-store, html .index-jewelry-store, .index-jewelry-store button
 .index-jewelry-store h4, .index-jewelry-store .h4, .index-jewelry-store h5, .index-jewelry-store .h5, .index-jewelry-store h6, .index-jewelry-store .h6,
 .index-jewelry-store #siteNav > li .megamenu .menu-title, .index-jewelry-store .collection-grid-item__title { font-family: 'PT Serif', serif; font-weight:700; letter-spacing:0.2px; text-transform:none; }
 .index-jewelry-store .mfp-close { font-size:28px; }
-.index-jewelry-store .btn, .index-jewelry-store .slideshow .btn, .index-jewelry-store .featuredContentStyle2.featuredContent .btn { color:#fff; background-color:#45cfbe; border:2px solid #45cfbe; padding:7px 15px; }
-.index-jewelry-store .btn:hover, .index-jewelry-store .slideshow .btn:hover, .index-jewelry-store .featuredContentStyle2.featuredContent .btn:hover { color:#45cfbe; background-color:#fff; border-color:#45cfbe; }
 .index-jewelry-store .notification-bar { background-color:#45cfbe; }
 .index-jewelry-store .notification-bar .notification-bar__message { color: #ffffff; letter-spacing: 0.5px; font-size:12px; display:block; padding:6px 10px; }
 .index-jewelry-store .notification-bar .close-announcement { color: #ffffff; }

@@ -1,5 +1,8 @@
 <link rel="stylesheet" type="text/css" href="{{asset('front/assets/css/quick_view.css')}}">
-
+@php
+   $product_name = str_replace(' ', '-', $singleproduct->product_name);
+    $product_url = strtolower($product_name);
+@endphp
 <div class="ajax-success-modal halo-modal ajax-quickview" data-quickview-modal="" style="display: block;">
     <div class="modal-overlay">
         <div class="halo-modal-content">
@@ -20,72 +23,41 @@
                             <div id="myCarousel" class="carousel slide">
                                 <!-- image slide carousel items -->
                                 <div class="carousel-inner">
+                                    @foreach($singleproductmultiplepic as $k=>$smplist)
+                                        @if($k == 0)
+                                        <?php $i=0; ?>
+                                        @else
+                                            <?php $i=$i+1; ?>
+                                        @endif
                                     <!-- slide 1 -->
-                                    <div class="item carousel-item active" data-slide-number="0">
-                                        <img data-src="{{asset('front/assets')}}/images/product-images/product2.jpg" src="{{asset('front/assets')}}/images/product-images/product2.jpg" alt="" title="">
+                                    <div class="item carousel-item @if($i == 0) active @endif" data-slide-number="{{$i}}">
+                                        <img data-src="{{asset('pgallery/'.$smplist->productimg_img)}}" src="{{asset('pgallery/'.$smplist->productimg_img)}}" alt="" title="">
                                     </div>
                                     <!-- End slide 1 -->
-                                    <!-- slide 2 -->
-                                    <div class="item carousel-item" data-slide-number="1">
-                                        <img data-src="{{asset('front/assets')}}/images/product-images/product2-1.jpg" src="{{asset('front/assets')}}/images/product-images/product2-1.jpg" alt="" title="">
-                                    </div>
-                                    <!-- End slide 3 -->
-                                    <!-- slide 2 -->
-                                    <div class="item carousel-item" data-slide-number="2">
-                                        <img data-src="{{asset('front/assets')}}/images/product-images/product2-2.jpg" src="{{asset('front/assets')}}/images/product-images/product2-2.jpg" alt="" title="">
-                                    </div>
-                                    <!-- End slide 3 -->
-                                    <!-- slide 4 -->
-                                    <div class="item carousel-item" data-slide-number="3">
-                                        <img data-src="{{asset('front/assets')}}/images/product-images/product2-3.jpg" src="{{asset('front/assets')}}/images/product-images/product2-3.jpg" alt="" title="">
-                                    </div>
-                                    <!-- End slide 4 -->
-                                    <!-- slide 5 -->
-                                    <div class="item carousel-item" data-slide-number="4">
-                                        <img data-src="{{asset('front/assets')}}/images/product-images/product2-4.jpg" src="{{asset('front/assets')}}/images/product-images/product2-4.jpg" alt="" title="">
-                                    </div>
-                                    <!-- End slide 4 -->
+                                        @endforeach
+
                                 </div>
                                 <!-- End image slide carousel items -->
                                 <!-- model thumbnail image -->
                                 <div class="model-thumbnail-img">
                                     <!-- model thumbnail slide -->
                                     <ul class="carousel-indicators list-inline">
-                                        <!-- slide 1 -->
-                                        <li class="list-inline-item active">
-                                            <a id="carousel-selector-0" class="selected" data-slide-to="0" data-target="#myCarousel">
-                                                <img data-src="{{asset('front/assets')}}/images/product-images/product2.jpg" src="{{asset('front/assets')}}/images/product-images/product2.jpg" alt="" title="">
-                                            </a>
-                                        </li>
-                                        <!-- End slide 1 -->
-                                        <!-- slide 2 -->
-                                        <li class="list-inline-item">
-                                            <a id="carousel-selector-1" data-slide-to="1" data-target="#myCarousel">
-                                                <img data-src="{{asset('front/assets')}}/images/product-images/product2-1.jpg" src="{{asset('front/assets')}}/images/product-images/product2-1.jpg" alt="" title="">
-                                            </a>
-                                        </li>
-                                        <!-- End slide 2 -->
-                                        <!-- slide 3 -->
-                                        <li class="list-inline-item">
-                                            <a id="carousel-selector-2" class="selected" data-slide-to="2" data-target="#myCarousel">
-                                                <img data-src="{{asset('front/assets')}}/images/product-images/product2-2.jpg" src="{{asset('front/assets')}}/images/product-images/product2-2.jpg" alt="" title="">
-                                            </a>
-                                        </li>
-                                        <!-- End slide 3 -->
-                                        <!-- slide 4 -->
-                                        <li class="list-inline-item">
-                                            <a id="carousel-selector-3" data-slide-to="3" data-target="#myCarousel">
-                                                <img data-src="{{asset('front/assets')}}/images/product-images/product2-3.jpg" src="{{asset('front/assets')}}/images/product-images/product2-3.jpg" alt="" title="">
-                                            </a>
-                                        </li>
-                                        <!-- End slide 4 -->
-                                        <!-- slide 5 -->
-                                        <li class="list-inline-item">
-                                            <a id="carousel-selector-4" data-slide-to="4" data-target="#myCarousel">
-                                                <img data-src="{{asset('front/assets')}}/images/product-images/product2-4.jpg" src="{{asset('front/assets')}}/images/product-images/product2-4.jpg" alt="" title="">
-                                            </a>
-                                        </li>
-                                        <!-- End slide 5 -->
+                                    @foreach($singleproductmultiplepic as $k=>$smplist)
+                                        @if($k == 0)
+                                            <?php $i=0; ?>
+                                        @else
+                                            <?php $i=$i+1; ?>
+                                        @endif
+                                            <!-- slide 1 -->
+                                            <li class="list-inline-item  @if($i == 0) active @endif">
+                                                <a id="carousel-selector-{{$i}}"  @if($i == 0) class="selected" @endif data-slide-to="{{$i}}" data-target="#myCarousel">
+                                                    <img data-src="{{asset('pgallery/'.$smplist->productimg_img)}}" src="{{asset('pgallery/'.$smplist->productimg_img)}}" alt="" title="">
+                                                </a>
+                                            </li>
+                                            <!-- End slide 1 -->
+                                    @endforeach
+
+
                                     </ul>
                                     <!-- End model thumbnail slide -->
                                     <!-- arrow button -->
@@ -98,75 +70,92 @@
                         </div>
                     </div>
                     <div class="col-12 col-sm-6 col-md-6 col-lg-6">
-                        <div class="product-brand"><a href="#">Charcoal</a></div>
-                        <h2 class="product-title">Product Quick View Popup</h2>
-
+                        <h2 class="product-title"> {{$singleproduct->product_name}}</h2>
                         <div class="product-info">
-                            <div class="product-stock"> <span class="instock">In Stock</span> <span class="outstock hide">Unavailable</span> </div>
-                            <div class="product-sku">SKU: <span class="variant-sku">UTM-123456</span></div>
+                            <div class="product-stock">
+                                @if($product_qty > 0)
+                                    <span class="instock ">In Stock</span>
+                                @elseif($product_qty <= 0)
+                                    <span class="outstock">Unavailable</span>
+                                @endif
+                            </div>
+                            <div class="product-sku">Code: <span
+                                        class="variant-sku">{{$singleproduct->product_styleref}}</span></div>
                         </div>
                         <div class="pricebox">
-                            <span class="price old-price"> BDT 900.00</span>
-                            <span class="price"> BDT 800.00</span>
+                            @if($singleproduct->discount > 0)
+                            <span class="price old-price text-danger" style="font-size: 16px" >BDT {{ $singleproduct->product_price}}</span>
+                            <span class="price">BDT {{ $singleproduct->discount_product_price}}</span>
+                                <span class="discount-badge"> <span class="devider">|</span>&nbsp;
+                                        <span>You Save</span>
+                                        <span class="product-single__save-amount"><span class="money">BDT {{ $singleproduct->product_price - $singleproduct->discount_product_price}}</span></span>
+                                        <span class="off">(<span>{{$singleproduct->discount}}</span>%)</span>
+                                    </span>
+                            @else
+                                <span class="price">BDT {{ $singleproduct->product_price}}</span>
+                            @endif
+
                         </div>
-                        <div class="sort-description">Avone Multipurpose Bootstrap 4 Html Template that will give you and your customers a smooth shopping experience which can be used for various kinds of stores such as fashion.. </div>
-                        <form method="post" action="#" id="product_form--option" class="product-form">
+                        <div class="sort-description">{!! $singleproduct->product_short_description !!} </div>
+                        <form action="{{url('/add-to-cart')}}" method="POST" id="add-to-cart-quickview-form"  class="product-form product-form-product-template hidedropdown">
+                            @csrf
+                            <input type="hidden" name="productid" value="{{$singleproduct->id}}" />
+                            <input type="hidden" name="productcolor" id="selectcolor" value="{{$product_color}}">
+                            <input type="hidden" name="productimage" id="productImage" value="{{$cart_image->productimg_img_thm}}">
+
                             <div class="product-options">
-                                <div class="swatch clearfix swatch-0 option1">
+                                <div class="swatch clearfix swatch-0 option1" style="width: 100%">
                                     <div class="product-form__item">
-                                        <label class="label">Color:<span class="required">*</span> <span class="slVariant">Red</span></label>
-                                        <div class="swatch-element color">
-                                            <input class="swatchInput" id="swatch-black0" type="radio" name="option-0" value="Black">
-                                            <label class="swatchLbl small black" for="swatch-black0" title="Black"></label>
-                                        </div>
-                                        <div class="swatch-element color">
-                                            <input class="swatchInput" id="swatch-blue1" type="radio" name="option-0" value="blue">
-                                            <label class="swatchLbl small blue" for="swatch-blue1" title="Blue"></label>
-                                        </div>
-                                        <div class="swatch-element color">
-                                            <input class="swatchInput" id="swatch-red1" type="radio" name="option-0" value="Blue">
-                                            <label class="swatchLbl small red" for="swatch-red1" title="Red"></label>
-                                        </div>
-                                        <div class="swatch-element color">
-                                            <input class="swatchInput" id="swatch-pink1" type="radio" name="option-0" value="Pink">
-                                            <label class="swatchLbl color small pink" for="swatch-pink1" title="Pink"></label>
-                                        </div>
-                                        <div class="swatch-element color">
-                                            <input class="swatchInput" id="swatch-orange1" type="radio" name="option-0" value="Orange">
-                                            <label class="swatchLbl color small orange" for="swatch-orange1" title="Orange"></label>
-                                        </div>
-                                        <div class="swatch-element color">
-                                            <input class="swatchInput" id="swatch-yellow1" type="radio" name="option-0" value="Yellow">
-                                            <label class="swatchLbl color small yellow" for="swatch-yellow1" title="Yellow"></label>
-                                        </div>
+                                        <label class="label">Color:<span class="required">*</span></label>
+                                        @foreach ($product_color_image as $i=>$color)
+                                            <?php
+                                            $swatch_color_album = str_replace('/', '-', $color->productalbum_name);
+                                            $swatch_color_album = strtolower($swatch_color_album);
+                                            ?>
+                                            <div class="swatch-element color">
+                                                <input class="swatchInput"
+                                                       id="quickview-swatch-1-{{$color->productalbum_name}}" type="radio"
+                                                       name="option-{{$i+1}}" value="{{$color->productalbum_name}}"
+                                                       @if(strtolower($color->productalbum_name) == $product_color) checked @endif>
+
+                                                <a href='{{url("shop/{$product_url}/color-{$swatch_color_album}/{$singleproduct->id}")}}'>
+                                                    <img class="rounded"
+                                                         src="{{asset('pgallery/'.$color->productalbum_img)}}"
+                                                         style="height: 30px; width: 30px">
+                                                </a>
+                                            </div>
+                                        @endforeach
                                     </div>
                                 </div>
+                                <br>
                                 <div class="swatch clearfix swatch-1 option2">
                                     <div class="product-form__item">
-                                        <label class="label">Size:<span class="required">*</span></label>
-                                        <div class="swatch-element xs">
-                                            <input class="swatchInput" id="swatch-1-xs1" type="radio" name="option-1" value="XS">
-                                            <label class="swatchLbl medium" for="swatch-1-xs1" title="XS">XS</label>
-                                        </div>
-                                        <div class="swatch-element s">
-                                            <input class="swatchInput" id="swatch-1-s1" type="radio" name="option-1" value="S">
-                                            <label class="swatchLbl medium" for="swatch-1-s1" title="S">S</label>
-                                        </div>
-                                        <div class="swatch-element m">
-                                            <input class="swatchInput" id="swatch-1-m1" type="radio" name="option-1" value="M">
-                                            <label class="swatchLbl medium" for="swatch-1-m1" title="M">M</label>
-                                        </div>
-                                        <div class="swatch-element l">
-                                            <input class="swatchInput" id="swatch-1-l1" type="radio" name="option-1" value="L">
-                                            <label class="swatchLbl medium" for="swatch-1-l1" title="L">L</label>
-                                        </div>
+                                        <label class="label">Size:<span class="required">*</span> <span class="text-danger ml-3" id="outOfStock">This Size is Currently Out Of Stock</span> </label></label>
+                                        @foreach($product_sizes as $s=>$size)
+                                            <div data-value="XS" class="swatch-element xs available">
+                                                <input class="swatchInput"
+                                                       id="quickview-swatch-0-{{$size->productsize_size}}" type="radio"
+                                                       name="option" value="{{$size->productsize_size}}" <?php if ($i == 0) {
+                                                    echo 'checked';
+                                                }?>>
+                                                <label class="swatchLbl medium @if($size->SizeWiseQty <= 0) outstock @else stock @endif"
+                                                       for="quickview-swatch-0-{{$size->productsize_size}}"
+                                                       title="{{$size->productsize_size}}">{{$size->productsize_size}}</label>
+                                            </div>
+                                        @endforeach
                                     </div>
                                 </div>
                                 <div class="product-action clearfix">
                                     <div class="add-to-cart">
-                                        <button type="button" class="btn button-cart">
-                                            <span>Add to cart</span>
-                                        </button>
+                                        @if($product_qty > 0)
+                                            <button id="add-to-cart" type="submit" class="btn button-cart">
+                                                <span>Add to cart</span>
+                                            </button>
+                                        @elseif($product_qty <= 0)
+                                            <button type="button" disabled name="add" class="btn button-cart">
+                                                <span>Out of stock</span>
+                                            </button>
+                                        @endif
                                     </div>
                                 </div>
                             </div>
@@ -178,114 +167,18 @@
         </div>
     </div>
 </div>
+
 <script>
-    jQuery(window).ready(function($){
-        $("#product-add-to-cart").click(function(e){
-            e.preventDefault();
-            $(".loading-modal").show();
-            var datastring = $("#add-to-cart-quickview-form").serialize();
-            //alert(datastring);
-            var base_url = "{{URL::to('/')}}";
-
-            var cart_url = base_url + "/cart/popup-add-to-cart";
-            $.ajax({
-                url:cart_url,
-                type:'POST',
-                data:datastring,
-                success:function(result){
-                    // alert(result);
-                    $(".loading-modal").hide();
-                    $("#cart-modal-content").html(result).fadeIn(800).delay(3000).fadeOut(1500);
-                    $('.close-modal').on('click', function (e) {
-                        $("#cart-modal-content").hide();
-                    });
-                    $('.continue-shopping').on('click', function (e) {
-                        $("#cart-modal-content").hide();
-                    });
-                    $("#btn_checkout_pop").on('click',function(){
-                        window.location.href = base_url+"/checkout";
-                    });
-                    var cart_count = base_url + "/cart/item-count";
-                    $.ajax({
-                        url:cart_count,
-                        type:'GET',
-                        success:function(result){
-                            if(result==0){
-                                $(".counter").hide();
-                                //$(".g-stickycart-count").hide();
-                            }else{
-                                $(".counter").show();
-                                $(".counter").html(result);
-                                //$(".g-stickycart-count").html(result);
-                            }
-                        }
-                    });
-                    var cart_reload = base_url + "/cart/reload";
-                    $.ajax({
-                        url:cart_reload,
-                        type:'GET',
-                        success:function(result){
-                            $('.block-minicart').empty();
-                            $('.block-minicart').append(result);
-                            $("#btn-minicart-close").on("click", function () {
-                                $(".block-minicart").removeClass("block-minicart-open");
-                            });
-                            $("#top-cart-btn-checkout").click(function(){
-                                window.location=base_url+ "/checkout";
-                            });
-                            $("#top-cart-btn-cart").click(function(){
-                                window.location=base_url+ "/shop-cart";
-                            });
-                        }
-                    });
-
-                }
-            });
+    jQuery(document).ready(function ($) {
+        $('#outOfStock').hide();
+        $('.outstock').click(function () {
+            document.getElementById("add-to-cart").disabled = true;
+            $('#outOfStock').show();
+        });
+        $('.stock').click(function () {
+            document.getElementById("add-to-cart").disabled = false;
+            $('#outOfStock').hide();
         });
 
-        var output = document.getElementById('customers_view');
-        setInterval(function ()
-        {
-            var x = Math.floor((Math.random() * 50) + 1);
-            output.innerHTML = x;
-        }, 3500);
-
-        function updatePricingQuickview() {
-            var quantity = parseInt($('[data-qv-qtt-id]').val());
-            var p = $('.quickview-tpl #product_regular_price').val();
-            var totalPrice1 = p * quantity;
-            $('.quickview-tpl .total-price span').html('Tk '+totalPrice1);
-
-        };
-
-        $('[data-qv-qtt-id]').on('change', updatePricingQuickview);
-
-        var buttonSlt = '[data-qv-minus-qtt], [data-qv-plus-qtt]',
-            buttonElm = $(buttonSlt);
-
-        $(document).off('click.changeQttQv', buttonSlt).on('click.changeQttQv', buttonSlt, function(e) {
-            e.preventDefault();
-            e.stopPropagation();
-
-            var self = $(this),
-                input = self.siblings('input[name="quantity"]'),
-                oldVal = parseInt(input.val()),
-                newVal = 1;
-
-            switch (true) {
-                case (self.hasClass('plus')): {
-                    newVal = oldVal + 1;
-                    break;
-                }
-                case (self.hasClass('minus') && oldVal > 1): {
-                    newVal = oldVal - 1;
-                    break;
-                }
-            }
-
-            input.val(newVal);
-
-            updatePricingQuickview();
-        });
     });
 </script>

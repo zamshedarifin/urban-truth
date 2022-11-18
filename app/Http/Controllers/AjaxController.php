@@ -46,7 +46,8 @@ class AjaxController extends Controller
         $productalbum = Productalbum::where('product_id', $product_id)->where('productalbum_name',$product_color)->first();
         $data['singleproductmultiplepic'] = Productimg::where('productalbum_id', $productalbum->id)->orderBy('id', 'ASC')->take(3)->get();
         $data['cart_image'] = Productimg::where('productalbum_id', $productalbum->id)->orderBy('id', 'ASC')->first();
-        $data['product_color_image'] = Productalbum::where('product_id', $product_id)->where('productalbum_name',$product_color)->get();
+        $data['product_color_image'] = Productalbum::where('product_id', $product_id)->get();
+
         $data['product_sizes'] = Productsize::where('product_id', $product_id)->where('color_name',$product_color)->get();
         $data['product_qty'] = Productsize::where('product_id', $product_id)->sum('SizeWiseQty');
         $data['selected_color']=$product_color;
